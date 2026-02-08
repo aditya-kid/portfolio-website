@@ -26,6 +26,15 @@ const slideInFromLeft = keyframes`
   }
 `;
 
+const spin = keyframes`
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+`;
+
 const ProjectCardContainer = styled.div`
   display: flex;
   background: rgba(30, 30, 46, 0.8);
@@ -52,6 +61,31 @@ const ProjectCardContainer = styled.div`
 
   @media (max-width: 768px) {
     flex-direction: column;
+  }
+`;
+
+const LoadingSpinner = styled.div`
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 50px;
+  height: 50px;
+  border: 4px solid rgba(124, 58, 237, 0.2);
+  border-top: 4px solid #7c3aed;
+  border-radius: 50%;
+  animation: ${spin} 0.8s linear infinite;
+  z-index: 10;
+`;
+
+const ImageWrapper = styled.div`
+  position: relative;
+  width: 100%;
+  height: 100%;
+  
+  img {
+    opacity: ${props => props.$loaded ? 1 : 0};
+    transition: opacity 0.3s ease;
   }
 `;
 
@@ -390,6 +424,11 @@ const ProjectLink = styled.a`
 const ProjectCard = React.memo(({ project, index }) => {
   const [lightboxOpen, setLightboxOpen] = useState(false);
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
+  const [loadedImages, setLoadedImages] = useState({});
+
+  const handleImageLoad = (imgIndex) => {
+    setLoadedImages(prev => ({ ...prev, [imgIndex]: true }));
+  };
 
   const handleImageClick = (imgIndex) => {
     setCurrentImageIndex(imgIndex);
@@ -422,13 +461,17 @@ const ProjectCard = React.memo(({ project, index }) => {
           >
             {project.images.map((image, imgIndex) => (
               <div key={imgIndex} onClick={() => handleImageClick(imgIndex)}>
-                <img
-                  src={image}
-                  alt={`${project.title} - ${imgIndex + 1}`}
-                  loading={imgIndex === 0 ? "eager" : "lazy"}
-                  decoding="async"
-                  title="Click to view larger"
-                />
+                <ImageWrapper $loaded={loadedImages[imgIndex]}>
+                  {!loadedImages[imgIndex] && <LoadingSpinner />}
+                  <img
+                    src={image}
+                    alt={`${project.title} - ${imgIndex + 1}`}
+                    loading={imgIndex === 0 ? "eager" : "lazy"}
+                    decoding="async"
+                    title="Click to view larger"
+                    onLoad={() => handleImageLoad(imgIndex)}
+                  />
+                </ImageWrapper>
               </div>
             ))}
           </Carousel>

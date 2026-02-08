@@ -1,4 +1,4 @@
-import React, { useEffect, useCallback } from 'react';
+import React, { useEffect, useCallback, useState } from 'react';
 import styled, { keyframes } from 'styled-components';
 
 const fadeIn = keyframes`
@@ -19,6 +19,29 @@ const zoomIn = keyframes`
     opacity: 1;
     transform: scale(1);
   }
+`;
+
+const spin = keyframes`
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+`;
+
+const LoadingSpinner = styled.div`
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 60px;
+  height: 60px;
+  border: 5px solid rgba(124, 58, 237, 0.2);
+  border-top: 5px solid #7c3aed;
+  border-radius: 50%;
+  animation: ${spin} 0.8s linear infinite;
+  z-index: 10;
 `;
 
 const LightboxOverlay = styled.div`
@@ -51,6 +74,8 @@ const LightboxImage = styled.img`
   object-fit: contain;
   border-radius: 12px;
   box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+  opacity: ${props => props.$loaded ? 1 : 0};
+  transition: opacity 0.3s ease;
 `;
 
 const CloseButton = styled.button`
@@ -156,6 +181,17 @@ const ImageHint = styled.div`
 `;
 
 const ImageLightbox = ({ images, currentIndex, onClose, onNavigate, projectTitle }) => {
+  const [imageLoaded, setImageLoaded] = useState(false);
+
+  // Reset loading state when image changes
+  useEffect(() => {
+    setImageLoaded(false);
+  }, [currentIndex]);
+
+  const handleImageLoad = () => {
+    setImageLoaded(true);
+  };
+
   const handleKeyDown = useCallback((e) => {
     if (e.key === 'Escape') {
       onClose();
@@ -218,9 +254,12 @@ const ImageLightbox = ({ images, currentIndex, onClose, onNavigate, projectTitle
       )}
       
       <LightboxContent onClick={(e) => e.stopPropagation()}>
+        {!imageLoaded && <LoadingSpinner />}
         <LightboxImage 
           src={images[currentIndex]} 
           alt={`${projectTitle} - Image ${currentIndex + 1}`}
+          $loaded={imageLoaded}
+          onLoad={handleImageLoad}
         />
       </LightboxContent>
       
