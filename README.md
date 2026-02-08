@@ -1,70 +1,96 @@
-# Getting Started with Create React App
+# Portfolio Website
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Website portofolio personal yang dibangun menggunakan React.js dengan desain modern dan responsif.
 
-## Available Scripts
+## Fitur Utama
 
-In the project directory, you can run:
+- **Header Section**: Foto profil dan informasi pribadi
+- **Navigation**: Kategori proyek (Hardware, Software, Mobile Apps)
+- **Project Showcase**: Tampilan proyek dengan carousel foto dan deskripsi
+- **Footer**: Informasi kontak dengan ikon media sosial
+- **Responsive Design**: Kompatibel dengan desktop dan mobile
+- **Modern UI**: Glass morphism effect dan gradient design
 
-### `npm start`
+## Teknologi yang Digunakan
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+- React.js
+- Styled Components
+- React Icons
+- React Responsive Carousel
+- CSS3 dengan effects modern
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## Cara Menjalankan
 
-### `npm test`
+1. Clone repository ini
+2. Install dependencies:
+   ```bash
+   npm install
+   ```
+3. Jalankan development server:
+   ```bash
+   npm start
+   ```
+4. Buka browser di `http://localhost:3000`
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## Kustomisasi
 
-### `npm run build`
+### Mengubah Informasi Pribadi
+Edit file `src/components/Header.js` untuk mengubah:
+- Nama
+- Foto profil
+- Deskripsi
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+### Menambah/Mengubah Proyek
+Edit file `src/data/projectsData.js` untuk:
+- Menambah proyek baru
+- Mengubah deskripsi proyek
+- Menambah foto proyek
+- Mengubah teknologi yang digunakan
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+### Mengubah Informasi Kontak
+Edit file `src/components/Footer.js` untuk mengubah:
+- Instagram
+- WhatsApp
+- LinkedIn
+- Email
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+## Struktur Folder
 
-### `npm run eject`
+```
+src/
+├── components/
+│   ├── Header.js          # Komponen header dengan foto dan nama
+│   ├── Navigation.js      # Navigasi kategori proyek
+│   ├── ProjectCard.js     # Kartu proyek individual
+│   ├── ProjectSection.js  # Section untuk menampilkan proyek
+│   └── Footer.js          # Footer dengan kontak
+├── data/
+│   └── projectsData.js    # Data proyek-proyek
+├── assets/
+│   └── images/           # Folder untuk gambar
+├── App.js                # Komponen utama
+├── App.css               # Styling global
+└── index.js              # Entry point
+```
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+## Deployment
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+Untuk deployment ke production:
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+```bash
+npm run build
+```
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+Folder `build` akan berisi file-file yang siap untuk deployment.
 
-## Learn More
+## Tips Penggunaan
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+1. **Foto Profil**: Ganti placeholder foto dengan foto Anda yang sesungguhnya
+2. **Gambar Proyek**: Upload gambar proyek Anda dan update URL di `projectsData.js`
+3. **Link Proyek**: Tambahkan link GitHub dan live demo yang benar
+4. **Kontak**: Update semua informasi kontak dengan data Anda yang sebenarnya
+5. **SEO**: Tambahkan meta tags di `public/index.html` untuk SEO yang lebih baik
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+## Lisensi
 
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+MIT License - Silakan gunakan untuk keperluan pribadi atau komersial.

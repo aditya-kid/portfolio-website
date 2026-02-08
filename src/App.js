@@ -1,23 +1,30 @@
-import logo from './logo.svg';
+import React, { useState, useCallback } from 'react';
 import './App.css';
+import Header from './components/Header';
+import Navigation from './components/Navigation';
+import ProjectSection from './components/ProjectSection';
+import Footer from './components/Footer';
+import { projectsData } from './data/projectsData';
 
 function App() {
+  const [activeCategory, setActiveCategory] = useState('hardware');
+
+  const handleCategoryChange = useCallback((category) => {
+    setActiveCategory(category);
+  }, []);
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Header />
+      <Navigation
+        activeCategory={activeCategory}
+        setActiveCategory={handleCategoryChange}
+      />
+      <ProjectSection
+        category={activeCategory}
+        projects={projectsData}
+      />
+      <Footer />
     </div>
   );
 }
